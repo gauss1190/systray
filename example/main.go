@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/energye/systray"
-	"github.com/energye/systray/icon"
 	"time"
+
+	"github.com/gauss1190/systray"
+	"github.com/gauss1190/systray/icon"
 )
 
-var start func()
-var end func()
+var (
+	start func()
+	end   func()
+)
 
 func main() {
 	go func() {
@@ -17,9 +20,8 @@ func main() {
 			fmt.Println("Exit at", now.String())
 		}
 
-		start, end = systray.RunWithExternalLoop(onReady, onExit) //windows/linux/macos
+		start, end = systray.RunWithExternalLoop(onReady, onExit) // windows/linux/macos
 		start()
-
 	}()
 	select {}
 }
@@ -38,9 +40,9 @@ func addQuitItem() {
 	mQuit.Enable()
 	mQuit.Click(func() {
 		fmt.Println("Requesting quit")
-		//systray.Quit()
-		//systray.Quit()// macos error
-		//end() // macos error
+		// systray.Quit()
+		// systray.Quit()// macos error
+		// end() // macos error
 		fmt.Println("Finished quitting")
 	})
 }
